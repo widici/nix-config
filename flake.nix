@@ -1,5 +1,5 @@
 {
-  description = "widici's NixOs config";
+  description = "widici's nix config";
   
   inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
@@ -15,14 +15,25 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
-    nixosConfigurations.ivar = nixpkgs.lib.nixosSystem {    
-      system = "x86_64-linux";
+  outputs = inputs:
+  let
+    system = "x86_64-linux";
+    homeConfig = import ./home-manager;
+  in
+  {
+    nixosConfigurations.ivar = inputs.nixpkgs.lib.nixosSystem {
+      system = system;
+      specialArgs = {inherit inputs;};     
       modules = [
-        nixos-wsl.nixosModules.default
-        home-manager.nixosModules.home-manager
+        ./modules
         ./hosts/ivar
       ];
+    };
+
+    homeConfigurations.widici = inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {inherit inputs;};
+      modules = [ homeConfig ];
     };
   };
 }
