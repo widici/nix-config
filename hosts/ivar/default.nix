@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ../../nixos/wsl.nix
-    ../../nixos/users.nix
-    ../../nixos/init-pkgs.nix
+    ../../nixos/system
   ];
+
+  system.wsl.enable = true;
 
   networking.hostName = "ivar";
 
