@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, username, ... }:
 
 {
   imports = [
@@ -11,8 +11,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.widici = import ../home-manager;
+    extraSpecialArgs = { inherit username; };
+    users.${username} = import ../home-manager;
   };
-
-  system.stateVersion = "25.05";
 }

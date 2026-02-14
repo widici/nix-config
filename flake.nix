@@ -20,8 +20,7 @@
     system = "x86_64-linux";
     username = "widici";
     hosts = ["ivar"];
-
-    lib = import ./lib { inherit inputs system; };
+    lib = import ./lib { inherit inputs system username; };
   in
   {
     nixosConfigurations = inputs.nixpkgs.lib.genAttrs hosts (hostname: lib.mkHost { inherit hostname; });

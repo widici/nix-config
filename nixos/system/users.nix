@@ -1,11 +1,11 @@
-{ config, lib, ... }:
+{ config, lib, username, ... }:
 
 {
   config = lib.mkIf config.system.initPkgs.enable {
-    users.users.widici = {
+    users.users.${username} = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
-      home = "/home/widici";
+      home = "/home/${username}";
     };
     
     security.sudo.enable = true;

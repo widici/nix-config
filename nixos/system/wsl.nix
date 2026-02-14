@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, lib, inputs, username, ... }:
 
 {
   imports = [
@@ -8,7 +8,7 @@
   config = lib.mkIf config.system.initPkgs.enable {
     wsl = {
       enable = true;
-      defaultUser = "widici";
+      defaultUser = username;
     };
   };
 }

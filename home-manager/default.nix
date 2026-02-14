@@ -1,12 +1,12 @@
-{ ... }:
+{ username, ... }:
 
 {
   imports = [
     ./programs
   ];
 
-  home.username = "widici";
-  home.homeDirectory = "/home/widici";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
   home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
