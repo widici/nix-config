@@ -1,12 +1,12 @@
-{ ... }:
+{ username, email, ... }:
 
 {
   programs.git = {
     enable = true;
 
     settings = {
-      user.name = "widici";
-      user.email = "84205124+widici@users.noreply.github.com";
+      user.name = username;
+      user.email = email;
 
       init.defaultBranch = "master";
       pull.rebase = false; # Decide later

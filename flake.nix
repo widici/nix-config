@@ -17,10 +17,11 @@
 
   outputs = inputs:
   let
-    system = "x86_64-linux";
     username = "widici";
+    email = "84205124+${username}@users.noreply.github.com";    
+    system = "x86_64-linux";
     hosts = ["ivar"];
-    lib = import ./lib { inherit inputs system username; };
+    lib = import ./lib { inherit inputs system username email; };
   in
   {
     nixosConfigurations = inputs.nixpkgs.lib.genAttrs hosts (hostname: lib.mkHost { inherit hostname; });
