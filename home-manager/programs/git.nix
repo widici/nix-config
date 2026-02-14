@@ -12,6 +12,10 @@
       pull.rebase = false; # Decide later
       push.autoSetupRemote = true;
 
+      gpg.format = "ssh";
+      user.signingkey = "~/.ssh/id_ed25519.pub";
+      commit.gpgsign = true;
+      
       alias = {
         st = "status";
         co = "checkout";
