@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./programs
+    ./cli-programs
+    ./editors
   ];
 
   home.username = username;
