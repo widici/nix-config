@@ -18,22 +18,13 @@
   outputs = inputs:
   let
     system = "x86_64-linux";
-    homeConfig = import ./home-manager;
+    username = "widici";
+    hosts = ["ivar"];
+
+    lib = import ./lib { inherit inputs system; };
   in
   {
-    nixosConfigurations.ivar = inputs.nixpkgs.lib.nixosSystem {
-      system = system;
-      specialArgs = {inherit inputs;};     
-      modules = [
-        ./modules
-        ./hosts/ivar
-      ];
-    };
-
-    homeConfigurations.widici = inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = {inherit inputs;};
-      modules = [ homeConfig ];
-    };
+    nixosConfigurations = inputs.nixpkgs.lib.genAttrs hosts (hostname: lib.mkHost { inherit hostname; });
+    homeConfigurations.${username} = lib.mkHome {};
   };
 }
