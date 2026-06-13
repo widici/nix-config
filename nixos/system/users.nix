@@ -1,4 +1,4 @@
-{ config, lib, username, ... }:
+{ config, lib, pkgs, username, ... }:
 
 {
   options.system.users.enable = lib.mkEnableOption "user creation and sudo access" // {
@@ -10,6 +10,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       home = "/home/${username}";
+      shell = if config.programs.fish.enable then pkgs.fish else pkgs.bash;
     };
     
     security.sudo.enable = true;

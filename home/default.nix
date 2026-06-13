@@ -4,6 +4,7 @@
   imports = [
     ./cli
     ./editors
+    ./shell
   ];
 
   home.username = username;
