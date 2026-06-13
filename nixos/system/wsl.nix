@@ -5,7 +5,7 @@
     inputs.nixos-wsl.nixosModules.wsl
   ];
 
-  options.system.wsl.enable = lib.mkEnableOption "WSL-specific config" // {
+  options.system.wsl.enable = lib.mkEnableOption "wsl-specific config" // {
     default = true;
   };
   

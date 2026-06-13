@@ -7,6 +7,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = { inherit inputs username email; };
 
   modules = [
-    ../home-manager
+    ../home
   ] ++ extraModules;
 }

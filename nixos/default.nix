@@ -12,6 +12,6 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit username email; };
-    users.${username} = import ../home-manager;
+    users.${username} = import ../home;
   };
 }
