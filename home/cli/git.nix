@@ -1,10 +1,11 @@
 { lib, config, username, email, ... }:
+
 {
-  options.cliPrograms.git.enable = lib.mkEnableOption "git" // {
+  options.cli.git.enable = lib.mkEnableOption "git" // {
     default = true;
   };
 
-  config = lib.mkIf config.cliPrograms.git.enable {
+  config = lib.mkIf config.cli.git.enable {
     programs.git = {
       enable = true;
 
