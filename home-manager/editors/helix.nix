@@ -1,6 +1,6 @@
 # TODO: add shell
 
-{ ... }:
+{ lib, config,... }:
 
 let
   # TODO: potentially rework this to use caps
@@ -9,31 +9,37 @@ let
   };
 in
 {
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
+  options.editors.helix.enable = lib.mkEnableOption "helix editor" // {
+    default = true;
+  };
 
-    settings = {
-      theme = "catppuccin_mocha";
+  config = lib.mkIf config.editors.helix.enable {
+    programs.helix = {
+      enable = true;
+      defaultEditor = true;
 
-      editor = {
-        line-number = "relative";
-        bufferline = "multiple";
-        true-color = true;
-        auto-format = true;
+      settings = {
+        theme = "catppuccin_mocha";
 
-        cursor-shape = {
-          insert = "bar";
-          normal = "block";
-          select = "underline";
+        editor = {
+          line-number = "relative";
+          bufferline = "multiple";
+          true-color = true;
+          auto-format = true;
+
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+
+          soft-wrap.enable = true;
         };
 
-        soft-wrap.enable = true;
-      };
-
-      keys = {
-        select = normalModeKey;
-        insert = normalModeKey;
+        keys = {
+          select = normalModeKey;
+          insert = normalModeKey;
+        };
       };
     };
   };

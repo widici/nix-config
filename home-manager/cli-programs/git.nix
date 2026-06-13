@@ -1,27 +1,33 @@
-{ username, email, ... }:
-
+{ lib, config, username, email, ... }:
 {
-  programs.git = {
-    enable = true;
+  options.cliPrograms.git.enable = lib.mkEnableOption "Enable git" // {
+    default = true;
+  };
 
-    settings = {
-      user.name = username;
-      user.email = email;
+  config = lib.mkIf config.cliPrograms.git.enable {
+    programs.git = {
+      enable = true;
 
-      init.defaultBranch = "master";
-      pull.rebase = false; # Decide later
-      push.autoSetupRemote = true;
+      settings = {
+        user.name = username;
+        user.email = email;
 
-      gpg.format = "ssh";
-      user.signingkey = "~/.ssh/id_ed25519.pub";
-      commit.gpgsign = true;
-      
-      alias = {
-        st = "status";
-        co = "checkout";
-        br = "branch";
-        cm = "commit -m";
-        cam = "commit -am";
+        init.defaultBranch = "master";
+        pull.rebase = false;
+        push.autoSetupRemote = true;
+
+        gpg.format = "ssh";
+        user.signingkey = "~/.ssh/id_ed25519.pub";
+        commit.gpgsign = true;
+
+        alias = {
+          st = "status";
+          pu = "push";
+          co = "checkout";
+          br = "branch";
+          cm = "commit -m";
+          cam = "commit -am";
+        };
       };
     };
   };
