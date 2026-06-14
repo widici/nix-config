@@ -12,6 +12,10 @@
       interactiveShellInit = ''
         set fish_greeting ""
       '';
+
+      shellAliases = {
+        cls = "clear";
+      };
     };
   }; 
 }
