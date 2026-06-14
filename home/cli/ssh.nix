@@ -10,7 +10,7 @@
       enable = true;
       enableDefaultConfig = false;
 
-      matchBlocks = {
+      settings = {
         "*" = {
            addKeysToAgent = "yes";
         };
