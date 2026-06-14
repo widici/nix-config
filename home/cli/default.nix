@@ -6,8 +6,9 @@
     ./delta.nix
     ./erd.nix
     ./git.nix
-    ./ssh.nix
     ./gh.nix
+    ./ssh.nix
+    ./tokei.nix
     ./zoxide.nix
   ];
 }
