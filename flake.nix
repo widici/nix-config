@@ -18,7 +18,7 @@
   outputs = inputs:
   let
     username = "widici";
-    email = "84205124+${username}@users.noreply.github.com";    
+    email = "84205124+${username}@users.noreply.github.com";
     system = "x86_64-linux";
     hosts = ["ivar"];
     lib = import ./lib { inherit inputs system username email; };
