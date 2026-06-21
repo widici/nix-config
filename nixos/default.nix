@@ -2,17 +2,9 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     ./core
     ./programs
   ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit username email; };
-    users.${username} = import ../home;
-  };
 }
