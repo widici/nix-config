@@ -1,11 +1,11 @@
 { config, lib, pkgs, username, ... }:
 
 {
-  options.system.users.enable = lib.mkEnableOption "user creation and sudo access" // {
+  options.core.users.enable = lib.mkEnableOption "user creation and sudo access" // {
     default = true;
   };
   
-  config = lib.mkIf config.system.users.enable {
+  config = lib.mkIf config.core.users.enable {
     users.users.${username} = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];

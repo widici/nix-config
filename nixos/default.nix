@@ -3,7 +3,8 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ./system
+    ./core
+    ./programs
   ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

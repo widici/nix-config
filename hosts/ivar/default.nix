@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  system.wsl.enable = true;
+  imports = [
+    ../../nixos/profiles/wsl.nix
+  ];
 
   networking.hostName = "ivar";
 
