@@ -19,9 +19,10 @@
   let
     username = "widici";
     email = "84205124+${username}@users.noreply.github.com";
+    path = "/home/${username}/nix-config";
     system = "x86_64-linux";
     hosts = ["ivar"];
-    lib = import ./lib { inherit inputs system username email; };
+    lib = import ./lib { inherit inputs system username email path; };
   in
   {
     nixosConfigurations = inputs.nixpkgs.lib.genAttrs hosts (hostname: lib.mkHost { inherit hostname; });
