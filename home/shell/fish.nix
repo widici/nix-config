@@ -15,6 +15,7 @@
 
       shellAliases = {
         cls = "clear";
+        c = "clear";
       };
     };
   }; 
