@@ -1,6 +1,6 @@
 # TODO: use a secret for auth keys?
 
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 
 {
   options.cli.gh.enable = lib.mkEnableOption "github cli" // {

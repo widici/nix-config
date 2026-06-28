@@ -10,7 +10,7 @@
       enable = true;
     };
 
-    programs.fish.shellAliases = lib.mkIf config.shell.fish.enable {
+    programs.fish.shellAliases = lib.mkIf config.shells.fish.enable {
       cat = "bat";
     };
   };

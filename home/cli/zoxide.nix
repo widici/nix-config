@@ -8,7 +8,7 @@
   config = lib.mkIf config.cli.zoxide.enable {
     programs.zoxide = {
       enable = true;
-      enableFishIntegration = config.shell.fish.enable;
+      enableFishIntegration = config.shells.fish.enable;
       options = [ "--cmd cd" ];
     };
   };

@@ -8,7 +8,7 @@
   config = lib.mkIf config.cli.fzf.enable {
     programs.fzf = {
       enable = true;
-      enableFishIntegration = config.shell.fish.enable;
+      enableFishIntegration = config.shells.fish.enable;
     };
   };
 }

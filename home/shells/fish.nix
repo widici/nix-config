@@ -1,11 +1,11 @@
 { lib, config, ... }:
 
 {
-  options.shell.fish.enable = lib.mkEnableOption "fish shell" // {
+  options.shells.fish.enable = lib.mkEnableOption "fish shell" // {
     default = true;
   };
 
-  config = lib.mkIf config.shell.fish.enable {
+  config = lib.mkIf config.shells.fish.enable {
     programs.fish = {
       enable = true;
 
