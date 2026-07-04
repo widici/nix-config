@@ -1,11 +1,21 @@
 { lib, config, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
+
+  cfg = config.modules.home.network.ssh;
+in
 {
-  options.cli.ssh.enable = lib.mkEnableOption "ssh" // {
-    default = true;
+  options.modules.home.network.ssh = {
+    enable = lib.mkEnableOption "ssh";
   };
 
-  config = lib.mkIf config.cli.ssh.enable {
+  config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
