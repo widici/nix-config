@@ -16,8 +16,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.git.delta = {
+    programs.delta = {
       enable = true;
+      enableGitIntegration = true;
 
       options = {
         navigate = true;
