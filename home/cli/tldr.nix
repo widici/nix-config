@@ -1,11 +1,21 @@
 { lib, config, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
+
+  cfg = config.modules.home.cli.tldr;
+in
 {
-  options.cli.tldr.enable = lib.mkEnableOption "tldr (tealdeer)" // {
-    default = true;
+  options.modules.home.cli.tldr = {
+    enable = mkEnableOption "tldr (tealdeer)";
   };
 
-  config = lib.mkIf config.cli.tldr.enable {
+  config = mkIf cfg.enable {
     programs.tealdeer = {
       enable = true;
       enableAutoUpdates = true;

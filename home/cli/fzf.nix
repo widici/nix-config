@@ -1,11 +1,21 @@
 {lib, config, ... }:
 
-{
-  options.cli.fzf.enable = lib.mkEnableOption "fzf" // {
-    default = true;
-  };
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
 
-  config = lib.mkIf config.cli.fzf.enable {
+  cfg = config.modules.home.cli.fzf;
+in
+{
+  options.modules.home.cli.fzf = {
+    enable = mkEnableOption "fzf";
+  }; 
+
+  config = mkIf cfg.enable {
     programs.fzf = {
       enable = true;
       enableFishIntegration = config.shells.fish.enable;

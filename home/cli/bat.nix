@@ -1,16 +1,26 @@
 { lib, config, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
+
+  cfg = config.modules.home.cli.bat;
+in
 {
-  options.cli.bat.enable = lib.mkEnableOption "bat" // {
-    default = true;
+  options.modules.home.cli.bat = {
+    enable = mkEnableOption "bat";
   };
 
-  config = lib.mkIf config.cli.bat.enable {
+  config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
     };
 
-    programs.fish.shellAliases = lib.mkIf config.shells.fish.enable {
+    programs.fish.shellAliases = mkIf config.shells.fish.enable {
       cat = "bat";
     };
   };

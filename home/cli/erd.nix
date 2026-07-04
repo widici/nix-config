@@ -1,18 +1,26 @@
-# TODO: option for enabling --icons when using a nerd font
-
 { lib, config, pkgs, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
+
+  cfg = config.modules.home.cli.erd;
+in
 {
-  options.cli.erd.enable = lib.mkEnableOption "erd" // {
-    default = true;
+  options.modules.home.cli.erd = {
+    enable = mkEnableOption "erd";
   };
 
-  config = lib.mkIf config.cli.erd.enable {
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       erdtree
     ];
 
-    programs.fish.shellAliases = lib.mkIf config.shells.fish.enable {
+    programs.fish.shellAliases = mkIf config.shells.fish.enable {
       tree = "erd";
     };
   };
