@@ -6,6 +6,7 @@ let
     mkOption
     types
     mkIf
+    mkMerge
     ;
 
   cfg = config.modules.home.cli.git;
@@ -18,6 +19,8 @@ in
   
   options.modules.home.cli.git = {
     enable = lib.mkEnableOption "git";
+
+    full.enable = lib.mkEnableOption "git and related cli tools, not git signing";
 
     username = mkOption {
       type = types.str;
@@ -51,34 +54,44 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    programs.git = {
-      enable = true;
-      
-      signing = mkIf cfg.signing.enable {
-        inherit (cfg.signing) format;
-        inherit (cfg.signing) key;
-        signByDefault = true;
+  config = mkMerge [
+    (mkIf cfg.full.enable {
+      modules.home.cli.git = {
+        enable = true;
+        delta.enable = true;
+        gh.enable = true;
       };
+    })
 
-      settings = {
-        user.name = cfg.username;
-        user.email = cfg.email;
+    (mkIf cfg.enable {
+      programs.git = {
+        enable = true;
+        
+        signing = mkIf cfg.signing.enable {
+          inherit (cfg.signing) format;
+          inherit (cfg.signing) key;
+          signByDefault = true;
+        };
 
-        init.defaultBranch = "master";
-        pull.rebase = false;
-        push.autoSetupRemote = true;
+        settings = {
+          user.name = cfg.username;
+          user.email = cfg.email;
 
-        alias = {
-          st = "status";
-          pu = "push";
-          puf = "push --force";
-          co = "checkout";
-          br = "branch";
-          cm = "commit -m";
-          cam = "commit -am";
+          init.defaultBranch = "master";
+          pull.rebase = false;
+          push.autoSetupRemote = true;
+
+          alias = {
+            st = "status";
+            pu = "push";
+            puf = "push --force";
+            co = "checkout";
+            br = "branch";
+            cm = "commit -m";
+            cam = "commit -am";
+          };
         };
       };
-    };
-  };
+    })
+  ];
 }
