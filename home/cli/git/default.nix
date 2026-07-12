@@ -18,9 +18,9 @@ in
   ];
   
   options.modules.home.cli.git = {
-    enable = lib.mkEnableOption "git";
+    enable = mkEnableOption "git";
 
-    full.enable = lib.mkEnableOption "git and related cli tools, not git signing";
+    full.enable = mkEnableOption "git and related cli tools, not git signing";
 
     username = mkOption {
       type = types.str;

@@ -12,10 +12,10 @@ let
 in
 {
   options.modules.home.cli.git.delta = {
-    enable = lib.mkEnableOption "git delta";
+    enable = mkEnableOption "git delta";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     programs.delta = {
       enable = true;
       enableGitIntegration = true;
