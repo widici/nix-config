@@ -3,20 +3,36 @@
 { lib, config,... }:
 
 let
-  # TODO: potentially rework this to use caps
-  normalModeKey = {
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    genAttrs
+    ;
+
+  cfg = config.modules.home.editors.helix;
+
+  disableArrowKeys = genAttrs [ "up" "down" "left" "right" ] (_: "no_op");
+  normalModeKeys = {
     f.j = "normal_mode";
   };
 in
 {
-  options.editors.helix.enable = lib.mkEnableOption "helix editor" // {
-    default = true;
+  options.modules.home.editors.helix = {
+    enable = mkEnableOption "helix";
+
+    default.enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "helix as the default editor";
+    };
   };
 
-  config = lib.mkIf config.editors.helix.enable {
+  config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = cfg.default.enable;
 
       settings = {
         theme = "catppuccin_mocha";
@@ -37,8 +53,9 @@ in
         };
 
         keys = {
-          select = normalModeKey;
-          insert = normalModeKey;
+          normal = disableArrowKeys;
+          select = normalModeKeys // disableArrowKeys;
+          insert = normalModeKeys // disableArrowKeys;
         };
       };
     };
