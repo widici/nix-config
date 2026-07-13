@@ -1,22 +1,34 @@
 { lib, config, ... }:
 
+let
+  inherit (lib)
+    mkEnableOption
+    mkOption
+    types
+    mkIf
+    ;
+
+  cfg = config.modules.home.shells.fish;
+in
 {
-  options.shells.fish.enable = lib.mkEnableOption "fish shell" // {
-    default = true;
+  options.modules.home.shells.fish = {
+    enable = mkEnableOption "fish";
   };
 
-  config = lib.mkIf config.shells.fish.enable {
-    programs.fish = {
-      enable = true;
+  config = mkIf cfg.enable {
+    programs = {
+      fish = {
+        enable = true;
 
-      interactiveShellInit = ''
-        set fish_greeting ""
-      '';
+        shellAliases = config.modules.home.shells.mergedAliases;
 
-      shellAliases = {
-        cls = "clear";
-        c = "clear";
+        interactiveShellInit = ''
+          set fish_greeting ""
+        '';
       };
+
+      fzf.enableFishIntegration = true;
+      zoxide.enableFishIntegration = true;
     };
   }; 
 }

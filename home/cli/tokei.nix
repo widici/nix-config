@@ -20,7 +20,7 @@ in
       tokei
     ];
 
-    programs.fish.shellAliases = mkIf config.shells.fish.enable {
+    modules.home.shells.extraAliases = {
       lc = "tokei";
       loc = "tokei";
     };

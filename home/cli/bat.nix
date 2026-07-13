@@ -20,7 +20,7 @@ in
       enable = true;
     };
 
-    programs.fish.shellAliases = mkIf config.shells.fish.enable {
+    modules.home.shells.extraAliases = {
       cat = "bat";
     };
   };

@@ -18,7 +18,6 @@ in
   config = mkIf cfg.enable {
     programs.fzf = {
       enable = true;
-      enableFishIntegration = config.shells.fish.enable;
     };
   };
 }

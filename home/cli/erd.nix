@@ -20,7 +20,7 @@ in
       erdtree
     ];
 
-    programs.fish.shellAliases = mkIf config.shells.fish.enable {
+    modules.home.shells.extraAliases = {
       tree = "erd";
     };
   };
