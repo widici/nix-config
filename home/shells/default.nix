@@ -44,6 +44,12 @@ in
       readOnly = true;
       description = "merged shell aliases (common and extra aliases)";
     };
+
+    greeting = mkOption {
+      type = types.str;
+      default = "";
+      description = "shell greeting";
+    };
   };
 
   config.modules.home.shells = genAttrs shells (name: {

@@ -19,11 +19,9 @@ in
     programs = {
       fish = {
         enable = true;
-
         shellAliases = config.modules.home.shells.mergedAliases;
-
         interactiveShellInit = ''
-          set fish_greeting ""
+          set fish_greeting "${config.modules.home.shells.greeting}"
         '';
       };
 
