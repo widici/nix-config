@@ -19,11 +19,12 @@ let
     iso = "date --iso-8601=seconds";
   };
 
-  shells = [ "fish" ];
+  shells = [ "fish" "bash" ];
 in
 {
   imports = [
     ./fish.nix
+    ./bash.nix
   ];
 
   options.modules.home.shells = {
