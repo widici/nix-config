@@ -16,7 +16,7 @@ let
     c = "clear";
     hist = "history";
     h = "history";
-    iso = "date --iso-8601=seconds";
+    iso = "date --iso-8601=date";
   };
 
   shells = [ "fish" "bash" ];

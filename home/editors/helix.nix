@@ -22,7 +22,7 @@ in
   options.modules.home.editors.helix = {
     enable = mkEnableOption "helix";
 
-    default.enable = mkOption {
+    defaultEditor = mkOption {
       type = types.bool;
       default = true;
       description = "helix as the default editor";
@@ -32,7 +32,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      defaultEditor = cfg.default.enable;
+      defaultEditor = cfg.defaultEditor;
 
       settings = {
         theme = "catppuccin_mocha";
