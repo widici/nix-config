@@ -1,5 +1,3 @@
-# TODO: add shell
-
 { lib, config,... }:
 
 let
@@ -38,6 +36,8 @@ in
         theme = "catppuccin_mocha";
 
         editor = {
+          shell = [ config.modules.home.shells.defaultShell "-c" ];
+          
           line-number = "relative";
           bufferline = "multiple";
           true-color = true;
