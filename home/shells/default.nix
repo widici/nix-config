@@ -25,6 +25,7 @@ in
   imports = [
     ./fish.nix
     ./bash.nix
+    ./starship.nix
   ];
 
   options.modules.home.shells = {

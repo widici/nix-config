@@ -21,7 +21,8 @@
 
       shells = {
         defaultShell = "fish";
-        enabledShells = [ "fish" "bash" ]; 
+        enabledShells = [ "fish" "bash" ];
+        starship.enable = true;
       };
     };
   };
