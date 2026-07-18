@@ -19,7 +19,7 @@ let
     iso = "date --iso-8601=date";
   };
 
-  shells = [ "fish" "bash" ];
+  availableShells = [ "fish" "bash" ];
 in
 {
   imports = [
@@ -28,10 +28,16 @@ in
   ];
 
   options.modules.home.shells = {
-    shell = mkOption {
-      type = types.enum shells;
+    defaultShell = mkOption {
+      type = types.enum availableShells;
       default = "fish";
-      description = "shell to enable";
+      description = "the default shell";
+    };
+
+    enabledShells = mkOption {
+      type = types.listOf (types.enum availableShells);
+      default = [ cfg.defaultShell ];
+      description = "shells to enable";
     };
     
     extraAliases = mkOption {
@@ -53,8 +59,8 @@ in
     };
   };
 
-  config.modules.home.shells = genAttrs shells (name: {
-    enable = cfg.shell == name;
+  config.modules.home.shells = genAttrs availableShells (name: {
+    enable = builtins.elem name cfg.enabledShells;
   }) // {
     mergedAliases = commonAliases // cfg.extraAliases;
   };

@@ -13,9 +13,16 @@
       ../../home/profiles/dev.nix
     ];
     
-    modules.home.cli.git.signing = {
-      enable = true;
-      key = "~/.ssh/id_ed25519.pub";
+    modules.home = {
+      cli.git.signing = {
+        enable = true;
+        key = "~/.ssh/id_ed25519.pub";
+      };
+
+      shells = {
+        defaultShell = "fish";
+        enabledShells = [ "fish" "bash" ]; 
+      };
     };
   };
 }

@@ -1,3 +1,5 @@
+# TODO: enable shells based on home shell config
+
 { config, lib, pkgs, username, ... }:
 
 {
@@ -10,8 +12,10 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       home = "/home/${username}";
-      shell = if config.programs.fish.enable then pkgs.fish else pkgs.bash;
+      shell = pkgs.fish;
     };
+
+    programs.fish.enable = true;
     
     security.sudo.enable = true;
   };
