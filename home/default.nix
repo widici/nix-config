@@ -5,6 +5,7 @@
     ./cli
     ./editors
     ./shells
+    ./theming
   ];
 
   home.username = username;

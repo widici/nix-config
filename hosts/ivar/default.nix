@@ -11,6 +11,7 @@
   home-manager.users.${username} = {
     imports = [
       ../../home/profiles/dev.nix
+      ../../home/profiles/headless.nix
     ];
     
     modules.home = {
@@ -23,6 +24,10 @@
         defaultShell = "fish";
         enabledShells = [ "fish" "bash" ];
         starship.enable = true;
+      };
+
+      theming.stylix = {
+        enable = true;
       };
     };
   };

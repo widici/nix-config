@@ -8,7 +8,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit username email; };
+    extraSpecialArgs = { inherit inputs username email; };
     users.${username} = import ../../home;
   };
 }

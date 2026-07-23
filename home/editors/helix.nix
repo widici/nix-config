@@ -33,8 +33,6 @@ in
       defaultEditor = cfg.defaultEditor;
 
       settings = {
-        theme = "catppuccin_mocha";
-
         editor = {
           shell = [ config.modules.home.shells.defaultShell "-c" ];
           
