@@ -2,7 +2,7 @@
 
 {
   modules.home = {
-    theming = {
+    styling = {
       stylix.headless = true;
     };
   };

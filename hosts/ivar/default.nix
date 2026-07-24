@@ -26,7 +26,7 @@
         starship.enable = true;
       };
 
-      theming.stylix = {
+      styling.stylix = {
         enable = true;
       };
     };
