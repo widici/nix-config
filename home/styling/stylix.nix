@@ -20,14 +20,14 @@ in
   imports = [
     inputs.stylix.homeModules.stylix
   ];
-  
+
   options.modules.home.styling.stylix = {
     enable = mkEnableOption "stylix";
 
     scheme = mkOption {
       type = types.str;
       default = "catppuccin-mocha";
-      description = "the system-wide color scheme (choose from https://github.com/tinted-styling/schemes/tree/spec-0.11/base16)";
+      description = "the system-wide color scheme (choose from https://github.com/tinted-theming/schemes/tree/spec-0.11/base16)";
     };
 
     headless = mkOption {
