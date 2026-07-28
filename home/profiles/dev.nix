@@ -4,7 +4,7 @@
   modules.home = {
     cli = {
       git.full.enable = true;
-      oxidisation.enable = true;
+      oxidization.enable = true;
     };
 
     editors = {

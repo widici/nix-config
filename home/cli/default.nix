@@ -23,11 +23,11 @@ in
   ];
 
   options.modules.home.cli = {
-    oxidisation.enable = mkEnableOption "rust replacements for common cli tools";
+    oxidization.enable = mkEnableOption "rust replacements for common cli tools";
   };
 
   config = mkMerge [
-    (mkIf cfg.oxidisation.enable {
+    (mkIf cfg.oxidization.enable {
       modules.home.cli = {
         bat.enable = true;
         erd.enable = true;
