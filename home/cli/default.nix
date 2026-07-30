@@ -14,6 +14,7 @@ in
 {
   imports = [
     ./bat.nix
+    ./direnv.nix
     ./erd.nix
     ./fzf.nix
     ./git
