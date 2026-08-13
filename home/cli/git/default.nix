@@ -1,4 +1,9 @@
-{ lib, config, username, email, ... }:
+{
+  lib,
+  config,
+  vars,
+  ...
+}:
 
 let
   inherit (lib)
@@ -16,7 +21,7 @@ in
     ./delta.nix
     ./gh.nix
   ];
-  
+
   options.modules.home.cli.git = {
     enable = mkEnableOption "git";
 
@@ -24,13 +29,13 @@ in
 
     username = mkOption {
       type = types.str;
-      default = username;
+      default = vars.username;
       description = "git user.name";
     };
 
     email = mkOption {
       type = types.str;
-      default = email;
+      default = vars.email;
       description = "git user.email";
     };
 
@@ -66,7 +71,7 @@ in
     (mkIf cfg.enable {
       programs.git = {
         enable = true;
-        
+
         signing = mkIf cfg.signing.enable {
           inherit (cfg.signing) format;
           inherit (cfg.signing) key;

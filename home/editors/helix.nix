@@ -1,11 +1,10 @@
-{ lib, config,... }:
+{ lib, config, ... }:
 
 let
   inherit (lib)
     mkEnableOption
     mkOption
     types
-    mkIf
     genAttrs
     ;
 
@@ -30,12 +29,15 @@ in
   config = lib.mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      defaultEditor = cfg.defaultEditor;
+      inherit (cfg) defaultEditor;
 
       settings = {
         editor = {
-          shell = [ config.modules.home.shells.defaultShell "-c" ];
-          
+          shell = [
+            config.modules.home.shells.defaultShell
+            "-c"
+          ];
+
           line-number = "relative";
           bufferline = "multiple";
           true-color = true;

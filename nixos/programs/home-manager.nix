@@ -1,4 +1,4 @@
-{ inputs, username, email, ... }:
+{ inputs, vars, ... }:
 
 {
   imports = [
@@ -8,7 +8,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs username email; };
-    users.${username} = import ../../home;
+    extraSpecialArgs = { inherit inputs vars; };
+    users.${vars.username} = import ../../home;
   };
 }

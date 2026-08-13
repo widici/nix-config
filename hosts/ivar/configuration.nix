@@ -1,19 +1,20 @@
-{ config, pkgs, username, ... }:
+{ vars, ... }:
 
 {
   imports = [
     ../../nixos/profiles/wsl.nix
   ];
-  
+
+  nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "ivar";
   system.stateVersion = "25.05";
 
-  home-manager.users.${username} = {
+  home-manager.users.${vars.username} = {
     imports = [
       ../../home/profiles/dev.nix
       ../../home/profiles/headless.nix
     ];
-    
+
     modules.home = {
       cli.git.signing = {
         enable = true;
@@ -22,7 +23,10 @@
 
       shells = {
         defaultShell = "fish";
-        enabledShells = [ "fish" "bash" ];
+        enabledShells = [
+          "fish"
+          "bash"
+        ];
         starship.enable = true;
       };
 

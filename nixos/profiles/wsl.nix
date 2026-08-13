@@ -1,12 +1,12 @@
-{ inputs, username, ... }:
+{ inputs, vars, ... }:
 
 {
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
   ];
- 
+
   wsl = {
     enable = true;
-    defaultUser = username;
+    defaultUser = vars.username;
   };
 }
