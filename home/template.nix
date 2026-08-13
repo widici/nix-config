@@ -35,6 +35,6 @@ in
       name
     ];
 
-    home.sessionVariables.GREET = cfg.greeting; 
+    home.sessionVariables.GREET = cfg.greeting;
   };
 }

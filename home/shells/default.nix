@@ -2,10 +2,8 @@
 
 let
   inherit (lib)
-    mkEnableOption
     mkOption
     types
-    mkIf
     genAttrs
     ;
 
@@ -19,7 +17,10 @@ let
     iso = "date --iso-8601=date";
   };
 
-  availableShells = [ "fish" "bash" ];
+  availableShells = [
+    "fish"
+    "bash"
+  ];
 in
 {
   imports = [
@@ -40,7 +41,7 @@ in
       default = [ cfg.defaultShell ];
       description = "shells to enable";
     };
-    
+
     extraAliases = mkOption {
       type = types.attrsOf types.str;
       default = { };
@@ -60,9 +61,11 @@ in
     };
   };
 
-  config.modules.home.shells = genAttrs availableShells (name: {
-    enable = builtins.elem name cfg.enabledShells;
-  }) // {
-    mergedAliases = commonAliases // cfg.extraAliases;
-  };
+  config.modules.home.shells =
+    genAttrs availableShells (name: {
+      enable = builtins.elem name cfg.enabledShells;
+    })
+    // {
+      mergedAliases = commonAliases // cfg.extraAliases;
+    };
 }

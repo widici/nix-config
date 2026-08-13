@@ -1,10 +1,8 @@
-{lib, config, ... }:
+{ lib, config, ... }:
 
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     mkIf
     ;
 
@@ -13,7 +11,7 @@ in
 {
   options.modules.home.cli.fzf = {
     enable = mkEnableOption "fzf";
-  }; 
+  };
 
   config = mkIf cfg.enable {
     programs.fzf = {

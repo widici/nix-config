@@ -3,8 +3,6 @@
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     mkIf
     ;
 
@@ -22,7 +20,7 @@ in
 
       options = {
         navigate = true;
-        dark = true;  
+        dark = true;
       };
     };
   };

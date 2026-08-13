@@ -3,8 +3,6 @@
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     mkIf
     ;
 
@@ -28,5 +26,5 @@ in
       fzf.enableFishIntegration = true;
       zoxide.enableFishIntegration = true;
     };
-  }; 
+  };
 }

@@ -9,8 +9,6 @@
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     mkIf
     concatStrings
     ;
