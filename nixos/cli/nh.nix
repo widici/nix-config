@@ -21,7 +21,6 @@ in
   config = mkIf cfg.enable {
     programs.nh = {
       enable = true;
-      clean.enable = true;
       flake = vars.path;
     };
   };
