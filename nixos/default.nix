@@ -3,6 +3,6 @@
 {
   imports = [
     ./core
-    ./programs
+    ./cli
   ];
 }

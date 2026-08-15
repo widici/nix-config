@@ -9,6 +9,8 @@
   networking.hostName = "ivar";
   system.stateVersion = "25.05";
 
+  modules.nixos.cli.nh.enable = true;
+
   home-manager.users.${vars.username} = {
     imports = [
       ../../home/profiles/dev.nix
