@@ -8,8 +8,6 @@ _:
       direnv.enable = true;
     };
 
-    editors = {
-      helix.enable = true;
-    };
+    editors.enable = true;
   };
 }

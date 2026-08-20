@@ -3,8 +3,7 @@
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
+    mkIf
     genAttrs
     ;
 
@@ -16,20 +15,17 @@ let
   };
 in
 {
+  imports = [
+    ./languages
+  ];
+
   options.modules.home.editors.helix = {
     enable = mkEnableOption "helix";
-
-    defaultEditor = mkOption {
-      type = types.bool;
-      default = true;
-      description = "helix as the default editor";
-    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     programs.helix = {
       enable = true;
-      inherit (cfg) defaultEditor;
 
       settings = {
         editor = {
