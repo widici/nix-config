@@ -16,7 +16,7 @@ let
 in
 {
   imports = [
-    ./languages
+    ./languages.nix
   ];
 
   options.modules.home.editors.helix = {
@@ -37,7 +37,6 @@ in
           line-number = "relative";
           bufferline = "multiple";
           true-color = true;
-          auto-format = true;
 
           cursor-shape = {
             insert = "bar";
