@@ -4,19 +4,14 @@ let
   inherit (lib)
     mkEnableOption
     mkIf
-    genAttrs
     ;
 
   cfg = config.modules.home.editors.helix;
-
-  disableArrowKeys = genAttrs [ "up" "down" "left" "right" ] (_: "no_op");
-  normalModeKeys = {
-    f.j = "normal_mode";
-  };
 in
 {
   imports = [
     ./languages.nix
+    ./keybinds.nix
   ];
 
   options.modules.home.editors.helix = {
@@ -45,12 +40,6 @@ in
           };
 
           soft-wrap.enable = true;
-        };
-
-        keys = {
-          normal = disableArrowKeys;
-          select = normalModeKeys // disableArrowKeys;
-          insert = normalModeKeys // disableArrowKeys;
         };
       };
     };
