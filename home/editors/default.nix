@@ -38,10 +38,6 @@ in
       default = [ cfg.defaultEditor ];
       description = "editors to enable";
     };
-
-    tooling = {
-      nix.enable = mkEnableOption "nix editor tooling";
-    };
   };
 
   config = mkIf cfg.enable {

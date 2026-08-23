@@ -32,10 +32,6 @@
         starship.enable = true;
       };
 
-      editors.tooling = {
-        nix.enable = true;
-      };
-
       styling.stylix = {
         enable = true;
       };

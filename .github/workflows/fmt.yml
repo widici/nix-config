@@ -1,4 +1,4 @@
-name: check fmt
+name: Check formatting
 
 on:
   push:
@@ -13,10 +13,10 @@ jobs:
   fmt:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v7
         
-      - name: install nix
+      - name: Install nix
         uses: cachix/install-nix-action@v31
         with:
           install_url: https://nixos.org/nix/install
@@ -25,6 +25,6 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes
 
-      - name: check nix formatting
+      - name: Check nix formatting
         run: nix fmt -- --ci
   
