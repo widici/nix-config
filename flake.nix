@@ -9,7 +9,12 @@
         email = "84205124+${username}@users.noreply.github.com";
         path = "/home/${username}/nix-config";
       };
+
       hosts = [ "ivar" ];
+      templates = [
+        "minimal"
+        "nix"
+      ];
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
@@ -30,6 +35,11 @@
             ];
           }
         );
+
+        templates = inputs.nixpkgs.lib.genAttrs templates (name: {
+          path = ./templates/${name};
+          inherit (import ./templates/${name}/flake.nix) description;
+        });
       };
 
       perSystem = { config, pkgs, ... }: {
