@@ -1,0 +1,25 @@
+name: update dependencies
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: 0 23 * * 5
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+     
+      - name: Prelude
+        uses: ./.github/actions/prelude
+        
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          pr-title: "chore(deps): update flake.lock"
