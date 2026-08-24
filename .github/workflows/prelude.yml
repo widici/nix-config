@@ -7,9 +7,19 @@ on:
         default: "ubuntu"
         required: false
         type: string
+
       command:
         required: false
         type: string
+
+      cachix:
+        default: true
+        required: false
+        type: boolean
+
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: false
 
 jobs:
   prelude:
@@ -26,6 +36,13 @@ jobs:
             auto-optimise-store = true
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
             experimental-features = nix-command flakes
+
+      - name: Setup cachix
+        if: ${{ inputs.cachix }}
+        uses: cachix/cachix-action@v17
+        with:
+          name: widici-nix-config
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Run command ${{ inputs.command }}
         if: ${{ inputs.command != '' }}
