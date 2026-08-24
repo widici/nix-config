@@ -1,0 +1,25 @@
+name: prelude
+description: nix prelude with cachix
+
+inputs:
+  cachix-auth-token:
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Install nix
+      uses: cachix/install-nix-action@v31
+      with:
+        install_url: https://nixos.org/nix/install
+        extra_nix_config: |
+          auto-optimise-store = true
+          access-tokens = github.com=${{ github.token }}
+          experimental-features = nix-command flakes
+
+    - name: Setup cachix
+      if: ${{ inputs.cachix-auth-token != '' }}
+      uses: cachix/cachix-action@v17
+      with:
+        name: widici-nix-config
+        authToken: "${{ inputs.cachix-auth-token}}"

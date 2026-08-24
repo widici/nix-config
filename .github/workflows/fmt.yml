@@ -1,23 +1,31 @@
-name: Check formatting
+name: check formatting
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - master
     paths:
       - "**.nix"
       - .github/workflows/fmt.yml
+
   pull_request:
     branches:
       - master
     paths:
       - "**.nix"
       - .github/workflows/fmt.yml
-  workflow_dispatch:
 
 jobs:
   fmt:
-    uses: ./.github/workflows/prelude.yml
-    with:
-      command: nix fmt -- --ci
-      cachix: false
+    runs-on: ubuntu-latest
+    steps:     
+      - name: Checkout repository
+        uses: actions/checkout@v7
+            
+      - name: Prelude
+        uses: ./.github/actions/prelude
+
+      - name: Run formatter check
+        run: nix fmt -- --ci
