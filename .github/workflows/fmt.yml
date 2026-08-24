@@ -11,20 +11,6 @@ on:
 
 jobs:
   fmt:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-        
-      - name: Install nix
-        uses: cachix/install-nix-action@v31
-        with:
-          install_url: https://nixos.org/nix/install
-          extra_nix_config: |
-            auto-optimise-store = true
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-            experimental-features = nix-command flakes
-
-      - name: Check nix formatting
-        run: nix fmt -- --ci
-  
+    uses: ./.github/workflows/prelude.yml
+    with:
+      command: nix fmt -- --ci

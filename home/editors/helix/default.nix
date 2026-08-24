@@ -40,6 +40,8 @@ in
           };
 
           soft-wrap.enable = true;
+
+          file-picker.hidden = false;
         };
       };
     };
