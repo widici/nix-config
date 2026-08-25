@@ -14,6 +14,7 @@ in
     ./bat.nix
     ./direnv.nix
     ./erd.nix
+    ./fastfetch.nix
     ./fzf.nix
     ./git
     ./tldr.nix
@@ -23,8 +24,8 @@ in
 
   options.modules.home.cli = {
     oxidization.enable = mkEnableOption "rust replacements for common cli tools";
-
     dev.enable = mkEnableOption "common cli tools used for development";
+    fun.enable = mkEnableOption "fun cli tools (e.g. fastfetch)";
   };
 
   config = mkMerge [
@@ -43,6 +44,12 @@ in
       modules.home.cli = {
         git.full.enable = true;
         direnv.enable = true;
+      };
+    })
+
+    (mkIf cfg.fun.enable {
+      modules.home.cli = {
+        fastfetch.enable = true;
       };
     })
   ];

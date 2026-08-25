@@ -19,9 +19,12 @@
     ];
 
     modules.home = {
-      cli.git.signing = {
-        enable = true;
-        key = "~/.ssh/id_ed25519.pub";
+      cli = {
+        fun.enable = true;
+        git.signing = {
+          enable = true;
+          key = "~/.ssh/id_ed25519.pub";
+        };
       };
 
       shells = {
