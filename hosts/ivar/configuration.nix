@@ -3,13 +3,12 @@
 {
   imports = [
     ../../nixos/profiles/wsl.nix
+    ../../nixos/profiles/qol.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "ivar";
   system.stateVersion = "25.05";
-
-  modules.nixos.cli.nh.enable = true;
 
   home-manager.users.${vars.username} = {
     imports = [
