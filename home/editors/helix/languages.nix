@@ -6,8 +6,10 @@ _:
       name = "nix";
       language-servers = [ "nixd" ];
       formatter = {
-        command = "treefmt";
+        command = "nix";
         args = [
+          "fmt"
+          "--"
           "-q"
           "--stdin"
           "file.nix"
