@@ -23,6 +23,8 @@ in
 
   options.modules.home.cli = {
     oxidization.enable = mkEnableOption "rust replacements for common cli tools";
+
+    dev.enable = mkEnableOption "common cli tools used for development";
   };
 
   config = mkMerge [
@@ -34,6 +36,13 @@ in
         tldr.enable = true;
         tokei.enable = true;
         zoxide.enable = true;
+      };
+    })
+
+    (mkIf cfg.dev.enable {
+      modules.home.cli = {
+        git.full.enable = true;
+        direnv.enable = true;
       };
     })
   ];

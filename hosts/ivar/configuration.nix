@@ -13,6 +13,7 @@
 
   home-manager.users.${vars.username} = {
     imports = [
+      ../../home/profiles/qol.nix
       ../../home/profiles/dev.nix
       ../../home/profiles/headless.nix
     ];
