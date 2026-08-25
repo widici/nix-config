@@ -1,5 +1,5 @@
-name: prelude
-description: nix prelude with cachix
+name: Prelude
+description: Nix prelude with cachix
 
 inputs:
   cachix-auth-token:
