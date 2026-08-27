@@ -26,6 +26,8 @@ jobs:
             
       - name: Prelude
         uses: ./.github/actions/prelude
+        with:
+          cachix-auth-token: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build hosts
         run: |
