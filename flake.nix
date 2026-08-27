@@ -25,6 +25,9 @@
       ];
 
       flake = {
+        hostNames = hosts;
+        templateNames = templates;
+
         nixosConfigurations = inputs.nixpkgs.lib.genAttrs hosts (
           host:
           inputs.nixpkgs.lib.nixosSystem {

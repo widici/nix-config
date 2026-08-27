@@ -1,0 +1,40 @@
+name: Build hosts
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - master
+    paths:
+      - "**.nix"
+      - .github/workflows/build.yml
+
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "**.nix"
+      - .github/workflows/build.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+            
+      - name: Prelude
+        uses: ./.github/actions/prelude
+
+      - name: Build hosts
+        run: |
+          hosts="$(nix eval '.#hostNames' --apply 'builtins.concatStringsSep " "')"
+
+          status=0
+          for host in $hosts; do
+            nix build ".#nixosConfigurations.${host}.config.system.build.toplevel" \
+              --print-build-logs --show-trace || status=1
+          done
+          
+          exit "$status"
