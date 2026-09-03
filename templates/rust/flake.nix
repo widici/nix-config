@@ -21,8 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fenix = {
-      url = "github:nix-community/fenix/monthly";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -37,24 +37,59 @@
         inputs.git-hooks.flakeModule
       ];
 
-      perSystem = { config, pkgs, ... }: {
-        treefmt.config = {
-          projectRootFile = "flake.nix";
+      perSystem =
+        { config, system, ... }:
+        let
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ (import inputs.rust-overlay) ];
+          };
 
-          programs = {
-            rustfmt.enable = true;
-            taplo.enable = true;
+          toolchain = pkgs.rust-bin.stable.latest.default.override {
+            extensions = [
+              "rust-src"
+              "rust-analyzer"
+            ];
+          };
+
+          platform = pkgs.makeRustPlatform {
+            rustc = toolchain;
+            cargo = toolchain;
+          };
+
+          cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
+        in
+        {
+          _module.args.pkgs = pkgs;
+
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+
+            programs = {
+              rustfmt.enable = true;
+              taplo.enable = true;
+            };
+          };
+
+          pre-commit.settings = {
+            hooks.treefmt.enable = true;
+          };
+
+          packages.default = platform.buildRustPackage {
+            name = cargoToml.package.name;
+            src = ./.;
+            cargoLock = {
+              lockFile = ./Cargo.lock;
+            };
+          };
+
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [ config.pre-commit.devShell ];
+            packages = [
+              toolchain
+              pkgs.taplo
+            ];
           };
         };
-
-        pre-commit.settings = {
-          hooks.treefmt.enable = true;
-        };
-
-        devShells.default = pkgs.mkShell {
-          inputsFrom = [ config.pre-commit.devShell ];
-          packages = [ pkgs.taplo ];
-        };
-      };
     };
 }
