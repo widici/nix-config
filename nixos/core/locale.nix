@@ -57,5 +57,9 @@ in
         LC_TIME = cfg.format;
       };
     };
+
+    console = {
+      inherit (cfg) keyMap;
+    };
   };
 }
