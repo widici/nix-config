@@ -8,6 +8,7 @@ on:
       - master
     paths:
       - "**.nix"
+      - "**/flake.lock"
       - .github/workflows/build.yml
 
   pull_request:
@@ -15,6 +16,7 @@ on:
       - master
     paths:
       - "**.nix"
+      - "**/flake.lock"
       - .github/workflows/build.yml
 
 jobs:
