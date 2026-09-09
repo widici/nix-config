@@ -14,13 +14,14 @@ in
     ./locale.nix
     ./nix.nix
     ./users.nix
+    ./wsl.nix
   ];
 
   options.modules.nixos.core = {
-    enable = mkEnableOption "core functionalities (e.g. users)";
+    full.enable = mkEnableOption "core functionalities (e.g. users)";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.full.enable {
     modules.nixos.core = {
       hm.enable = true;
       nix.enable = true;

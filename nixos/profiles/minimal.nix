@@ -1,5 +1,5 @@
 _:
 
 {
-  modules.nixos.core.enable = true;
+  modules.nixos.core.full.enable = true;
 }
