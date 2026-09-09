@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../nixos/profiles/minimal.nix
     ../../nixos/profiles/wsl.nix
     ../../nixos/profiles/qol.nix
   ];

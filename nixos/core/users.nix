@@ -1,19 +1,35 @@
 {
+  lib,
+  config,
   pkgs,
   vars,
   ...
 }:
 
-{
-  users.users.${vars.username} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    home = "/home/${vars.username}";
+let
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    ;
 
-    shell = pkgs.fish;
+  cfg = config.modules.nixos.core.users;
+in
+{
+  options.modules.nixos.core.users = {
+    enable = mkEnableOption "users";
   };
 
-  programs.fish.enable = true;
+  config = mkIf cfg.enable {
+    users.users.${vars.username} = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      home = "/home/${vars.username}";
 
-  security.sudo.enable = true;
+      shell = pkgs.fish;
+    };
+
+    programs.fish.enable = true;
+
+    security.sudo.enable = true;
+  };
 }

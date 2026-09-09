@@ -6,14 +6,18 @@
 
 let
   inherit (lib)
+    mkEnableOption
     mkOption
     types
+    mkIf
     ;
 
   cfg = config.modules.nixos.core.locale;
 in
 {
   options.modules.nixos.core.locale = {
+    enable = mkEnableOption "locale";
+
     language = mkOption {
       type = types.str;
       default = "en_US.UTF-8";
@@ -39,7 +43,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     time.timeZone = cfg.timeZone;
 
     i18n = {
