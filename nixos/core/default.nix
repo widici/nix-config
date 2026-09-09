@@ -18,7 +18,7 @@ in
   ];
 
   options.modules.nixos.core = {
-    full.enable = mkEnableOption "core functionalities (e.g. users)";
+    full.enable = mkEnableOption "core functionalities (e.g. users & locale), not wsl";
   };
 
   config = mkIf cfg.full.enable {
