@@ -24,7 +24,7 @@ in
   config = mkIf cfg.full.enable {
     modules.nixos.core = {
       hm.enable = true;
-      nix.enable = true;
+      nix.full.enable = true;
       users.enable = true;
       locale.enable = true;
     };
