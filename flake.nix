@@ -14,6 +14,7 @@
       templates = [
         "minimal"
         "nix"
+        "rust"
       ];
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
