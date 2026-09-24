@@ -16,5 +16,21 @@ _:
         ];
       };
     }
+
+    {
+      name = "ruby";
+      formatter = {
+        command = "rubocop";
+        args = [
+          "--stdin"
+          "foo.rb"
+          "-a"
+          "--stderr"
+          "--fail-level"
+          "fatal"
+          "--server"
+        ];
+      };
+    }
   ];
 }

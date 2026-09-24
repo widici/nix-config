@@ -16,6 +16,16 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ruby-nix.url = "github:inscapist/ruby-nix";
 
     nixpkgs-ruby = {
@@ -29,8 +39,13 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        inputs.git-hooks.flakeModule
+      ];
+
       perSystem =
-        { system, ... }:
+        { config, system, ... }:
         let
           pkgs = import inputs.nixpkgs {
             inherit system;
@@ -55,12 +70,30 @@
             ;
         in
         {
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+
+            programs = {
+              rubocop.enable = true;
+            };
+          };
+
+          pre-commit.settings = {
+            hooks.treefmt.enable = true;
+          };
+
           devShells.default = pkgs.mkShell {
             BUNDLE_PATH = "vendor/bundle";
+
+            inputsFrom = [
+              config.pre-commit.devShell
+              config.treefmt.build.devShell
+            ];
 
             packages = [
               env
               ruby
+              pkgs.ruby-lsp
             ];
           };
         };
