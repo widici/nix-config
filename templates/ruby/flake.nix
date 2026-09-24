@@ -56,14 +56,14 @@
           ruby = pkgs."ruby-latest";
           gemset = if builtins.pathExists ./gemset.nix then import ./gemset.nix else { };
           # See default: https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/ruby-modules/gem-config/default.nix
-          gemConfig = { };
+          extraGemConfig = { };
 
           inherit
             (
               (inputs.ruby-nix.lib pkgs {
                 inherit ruby gemset;
                 name = "project-name";
-                gemConfig = pkgs.defaultGemConfig // gemConfig;
+                gemConfig = pkgs.defaultGemConfig // extraGemConfig;
               })
             )
             env
