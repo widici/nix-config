@@ -15,6 +15,7 @@
         "minimal"
         "nix"
         "rust"
+        "ruby"
       ];
     in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
