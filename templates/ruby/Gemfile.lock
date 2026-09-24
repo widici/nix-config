@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ruby_cowsay (0.1.3)
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  ruby_cowsay (>= 0.1.0)
+
+CHECKSUMS
+  ruby_cowsay (0.1.3) sha256=0fd340a128955bd32ce954a76a72c6bb853e782772a9328e9a1ab1c61f6ea7f4
+
+BUNDLED WITH
+  4.0.20

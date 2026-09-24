@@ -22,11 +22,6 @@
       url = "github:bobvanderlinden/nixpkgs-ruby";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-
-    bundix = {
-      url = "github:inscapist/bundix/main";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -58,8 +53,6 @@
             )
             env
             ;
-
-          bundix = inputs.bundix.packages.${system}.default;
         in
         {
           devShells.default = pkgs.mkShell {
@@ -67,7 +60,7 @@
 
             packages = [
               env
-              bundix
+              ruby
             ];
           };
         };
