@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../nixos/profiles/minimal.nix
-    ../../nixos/profiles/wsl.nix
-    ../../nixos/profiles/qol.nix
+    ../../modules/nixos/profiles/minimal.nix
+    ../../modules/nixos/profiles/wsl.nix
+    ../../modules/nixos/profiles/qol.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
@@ -13,9 +13,9 @@
 
   home-manager.users.${vars.username} = {
     imports = [
-      ../../home/profiles/qol.nix
-      ../../home/profiles/dev.nix
-      ../../home/profiles/headless.nix
+      ../../modules/home/profiles/qol.nix
+      ../../modules/home/profiles/dev.nix
+      ../../modules/home/profiles/headless.nix
     ];
 
     modules.home = {
