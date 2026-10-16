@@ -41,6 +41,12 @@ in
       default = "sv-latin1";
       description = "console keymap";
     };
+
+    layout = mkOption {
+      type = types.str;
+      default = "se";
+      description = "graphical keyboard layout";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -65,5 +71,7 @@ in
     console = {
       inherit (cfg) keyMap;
     };
+
+    services.xserver.xkb.layout = cfg.layout;
   };
 }
