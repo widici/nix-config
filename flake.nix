@@ -10,7 +10,7 @@
         path = "/home/${username}/nix-config";
       };
 
-      hosts = [ "ivar" ];
+      hosts = [ "ivar" "alvar" ];
       templates = [
         "minimal"
         "nix"
